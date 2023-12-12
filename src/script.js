@@ -193,11 +193,11 @@ const cursor = {
   y: 0
 }
 
-// const button = document.getElementById('btn')
-// button.addEventListener('click', onClick)
+const button = document.getElementById('btn')
+button.addEventListener('click', onClick)
 
 function onClick() {
-  // console.log('click')
+  console.log('click')
   if (typeof DeviceOrientationEvent.requestPermission === 'function') {
     DeviceOrientationEvent.requestPermission()
       .then(permissionState => {
