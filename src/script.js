@@ -22,7 +22,14 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const matcapTextTexture = textureLoader.load('./textures/matcaps/3.png')
+
+const matcapTextTexture = textureLoader.load('./textures/matcaps/7.png')
+
+const wrappedGiftTexture = textureLoader.load('./textures/wrapped_gift_paper.jpeg')
+wrappedGiftTexture.wrapS = THREE.RepeatWrapping
+wrappedGiftTexture.wrapT = THREE.RepeatWrapping
+wrappedGiftTexture.repeat.x = 5
+wrappedGiftTexture.repeat.y = 5
 
 /**
  * Lights
@@ -34,14 +41,11 @@ scene.add(ambientLight)
 const pointLight = new THREE.PointLight(0xffffff, .8)
 pointLight.position.set(-5, 4.5, 6.5)
 pointLight.castShadow = true
-pointLight.shadow.camera.top = 2
-pointLight.shadow.camera.right = 2
-pointLight.shadow.camera.bottom = - 2
-pointLight.shadow.camera.left = - 2
-pointLight.shadow.mapSize.set(1024, 1024)
-
-const pointLightHelper = new THREE.PointLightHelper(pointLight, 3)
-scene.add(pointLightHelper)
+pointLight.shadow.camera.near = 0.1
+pointLight.shadow.camera.far = 25
+pointLight.shadow.camera.fov = 50
+pointLight.shadow.bias = 0.001
+pointLight.shadow.mapSize.set(2048, 2048)
 
 scene.add(pointLight)
 
@@ -57,6 +61,8 @@ gltfLoader.load(
     for (let i = 0; i < 300; i++) {
       const clone = gltf.scene.clone()
 
+      clone.name = 'Cube'
+
       clone.position.x = (Math.random() - .5) * 30
       clone.position.y = (Math.random() - .5) * 30
       clone.position.z = (Math.random() - .5) * 30
@@ -67,6 +73,10 @@ gltfLoader.load(
       const scale = Math.random() * .8
       clone.scale.set(scale, scale, scale)
 
+      clone.traverse((child) => {
+        child.castShadow = true
+      })
+
       scene.add(clone)
     }
   },
@@ -75,46 +85,66 @@ gltfLoader.load(
 // Walls
 const wallRight = new THREE.Mesh(
   new THREE.PlaneGeometry(50, 50),
-  new THREE.MeshStandardMaterial({ color: '#c8c6bf' })
+  new THREE.MeshStandardMaterial({
+    color: '#c8c6bf',
+    map: wrappedGiftTexture,
+    metalness: 0,
+    roughness: .8
+  })
 )
 wallRight.position.set(8, 0, -8)
 wallRight.rotation.y = Math.PI * 1.5
-wallRight.castShadow = true
 wallRight.receiveShadow = true
 
 const wallLeft = new THREE.Mesh(
   new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({ color: '#c8c6bf' })
+  new THREE.MeshStandardMaterial({
+    color: '#c8c6bf',
+    map: wrappedGiftTexture,
+    metalness: 0,
+    roughness: .8
+  })
 )
 wallLeft.position.set(-8, 0, -8)
 wallLeft.rotation.y = Math.PI * .5
-wallLeft.castShadow = true
 wallLeft.receiveShadow = true
 
 const roof = new THREE.Mesh(
   new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({ color: '#c8c6bf' })
+  new THREE.MeshStandardMaterial({
+    color: '#c8c6bf',
+    map: wrappedGiftTexture,
+    metalness: 0,
+    roughness: .8
+  })
 )
 roof.position.set(0, 8, -8)
 roof.rotation.x = Math.PI * .5
-roof.castShadow = true
 roof.receiveShadow = true
 
 const floor = new THREE.Mesh(
   new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({ color: '#c8c6bf' })
+  new THREE.MeshStandardMaterial({
+    color: '#c8c6bf',
+    map: wrappedGiftTexture,
+    metalness: 0,
+    roughness: .8
+  })
 )
 floor.position.set(0, -8, -8)
 floor.rotation.x = Math.PI * -.5
-floor.castShadow = true
 floor.receiveShadow = true
 
 const backgroundWall = new THREE.Mesh(
   new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({ color: '#c8c6bf' })
+  new THREE.MeshStandardMaterial({
+    color: '#c8c6bf',
+    map: wrappedGiftTexture,
+    metalness: 0,
+    roughness: .8
+  })
 )
 backgroundWall.position.set(0, 0, -5)
-backgroundWall.castShadow = true
 backgroundWall.receiveShadow = true
 
 scene.add(wallRight, wallLeft, roof, floor, backgroundWall)
@@ -135,13 +165,13 @@ let fontObject = null
 
 function loadFont(size) {
   fontLoader.loadAsync(
-    '/fonts/helvetiker_regular.typeface.json',
+    '/fonts/christmas.json',
     (xhr) => {
       console.log(`${(xhr.loaded / xhr.total * 100)}% loaded`)
     }
   ).then((font) => {
     const textGeometry = new TextGeometry(
-      `HO HO HO !\nSois patient...`,
+      `Ho Ho Ho !\nSois patient...`,
       {
         font,
         size,
@@ -157,14 +187,14 @@ function loadFont(size) {
 
     textGeometry.center()
 
-    const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTextTexture })
+    const textMaterial = new THREE.MeshStandardMaterial({ color: '#1d6b3f' })
     fontObject = new THREE.Mesh(textGeometry, textMaterial)
 
     scene.add(fontObject)
   })
 }
 
-loadFont((sizes.width / sizes.height) * .7)
+loadFont((sizes.width / sizes.height) * 1.4)
 
 window.addEventListener('resize', () => {
   // Update sizes
@@ -241,9 +271,11 @@ const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
 })
-renderer.outputColorSpace = THREE.LinearSRGBColorSpace
+
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.outputColorSpace = THREE.LinearSRGBColorSpace
+
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
@@ -261,9 +293,15 @@ const tick = () => {
   camera.position.y = (cursor.y * .8) + 1
   camera.lookAt(0, 0, 0)
 
-  // animate camera.z from 10 to 5 only once. Make it ease in and out
-  // camera.position.z = Math.sin(elapsedTime) * 2 + 8
+  // Rotate the blocks and only the blocks
+  scene.children.forEach((child) => {
+    if (child.name === 'Cube') {
+      child.rotation.y = elapsedTime * .2
+    }
+  })
 
+  // Move the camera z position
+  camera.position.z = (Math.sin(elapsedTime * .1)) + 6
 
   // Render
   renderer.render(scene, camera)
