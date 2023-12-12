@@ -210,7 +210,8 @@ function handleMobileOrientation(event) {
   cursor.x = x / 180
   cursor.y = y / 180
 }
-await DeviceOrientationEvent.requestPermission().then(response => {
+
+DeviceOrientationEvent.requestPermission().then(response => {
   if (response === 'granted') {
     window.addEventListener("deviceorientation", handleMobileOrientation, true)
   } else {
