@@ -197,7 +197,8 @@ const button = document.getElementById('btn')
 button.addEventListener('click', onClick)
 
 const IS_IOS_SAFARI = typeof DeviceOrientationEvent.requestPermission === 'function'
-button.style.display = IS_IOS_SAFARI ? 'block' : 'none'
+
+window.requestAnimationFrame(() => button.style.display = IS_IOS_SAFARI ? 'block' : 'none')
 
 function onClick() {
   if (IS_IOS_SAFARI) {
