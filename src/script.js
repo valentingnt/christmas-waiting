@@ -203,6 +203,22 @@ window.addEventListener('touchmove', (event) => {
   cursor.y = - (event.touches[0].clientY / sizes.height - 0.5)
 }, { passive: true })
 
+function handleMobileOrientation(event) {
+  const x = event.beta
+  const y = event.gamma
+
+  cursor.x = x / 180
+  cursor.y = y / 180
+}
+await DeviceOrientationEvent.requestPermission().then(response => {
+  if (response === 'granted') {
+    window.addEventListener("deviceorientation", handleMobileOrientation, true)
+  } else {
+    console.log('Permission to access device orientation is denied.')
+  }
+})
+
+
 /**
  * Renderer
  */
