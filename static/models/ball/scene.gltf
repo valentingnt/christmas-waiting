@@ -1,0 +1,397 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 2531,
+      "max": [
+        9.266549110412598,
+        1.6189409494400024,
+        1.9562269449234009
+      ],
+      "min": [
+        6.1143388748168945,
+        -1.5332679748535156,
+        -1.5424519777297974
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 30372,
+      "componentType": 5126,
+      "count": 2531,
+      "max": [
+        0.9999696016311646,
+        0.9999696016311646,
+        1.0
+      ],
+      "min": [
+        -0.9999923706054688,
+        -0.9999923706054688,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2531,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 13242,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 60744,
+      "componentType": 5126,
+      "count": 2,
+      "max": [
+        6.328606128692627,
+        0.2735390067100525,
+        -0.37515801191329956
+      ],
+      "min": [
+        6.325743198394775,
+        0.2726460099220276,
+        -0.3845579922199249
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 52968,
+      "componentType": 5125,
+      "count": 2,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 60768,
+      "componentType": 5126,
+      "count": 17488,
+      "max": [
+        6.908999919891357,
+        0.5394020080566406,
+        0.9878910183906555
+      ],
+      "min": [
+        6.066954135894775,
+        -1.1506270170211792,
+        -0.910975992679596
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 270624,
+      "componentType": 5126,
+      "count": 17488,
+      "max": [
+        0.20420818030834198,
+        0.9181544780731201,
+        0.9978821873664856
+      ],
+      "min": [
+        -0.9999920129776001,
+        -0.9983648657798767,
+        -0.997725784778595
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 20248,
+      "componentType": 5126,
+      "count": 17488,
+      "max": [
+        0.8267329931259155,
+        1.0
+      ],
+      "min": [
+        0.17326700687408447,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 52976,
+      "componentType": 5125,
+      "count": 101970,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 480480,
+      "componentType": 5126,
+      "count": 7172,
+      "max": [
+        8.04389476776123,
+        0.3962869942188263,
+        2.3331708908081055
+      ],
+      "min": [
+        7.336993217468262,
+        -0.3106139898300171,
+        1.63413405418396
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 566544,
+      "componentType": 5126,
+      "count": 7172,
+      "max": [
+        0.9999696016311646,
+        0.9999696016311646,
+        0.9624426960945129
+      ],
+      "min": [
+        -0.9999696016311646,
+        -0.9999696016311646,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 160152,
+      "componentType": 5126,
+      "count": 7172,
+      "max": [
+        1.0,
+        1.0
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 460856,
+      "componentType": 5125,
+      "count": 14778,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "BlueCrystal500 (https://sketchfab.com/BlueCrystal500)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/christmas-ball-5bd57db0ec4048378f21afc55f4dbd00",
+      "title": "Christmas Ball"
+    },
+    "generator": "Sketchfab-12.66.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 519968,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 217528,
+      "byteOffset": 519968,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 652608,
+      "byteOffset": 737496,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1390104,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Material.001",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.9041773379690979,
+          0.005723298279602432,
+          0.005723298279602432,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Material.002",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8853105837027843,
+          0.5089220600371127,
+          0.014505827386880107,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.6
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "snow",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.9819772483491759,
+          0.9142303425415408,
+          0.9142303425415408,
+          1.0
+        ],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.0
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_1",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4
+          },
+          "indices": 5,
+          "material": 2,
+          "mode": 1
+        }
+      ]
+    },
+    {
+      "name": "Object_2",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 7,
+            "POSITION": 6,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Object_3",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 11,
+            "POSITION": 10,
+            "TEXCOORD_0": 12
+          },
+          "indices": 13,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "name": "SF.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    },
+    {
+      "mesh": 1,
+      "name": "Object_3"
+    },
+    {
+      "mesh": 2,
+      "name": "Object_4"
+    },
+    {
+      "mesh": 3,
+      "name": "Object_5"
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}

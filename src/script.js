@@ -23,8 +23,6 @@ const scene = new THREE.Scene()
  */
 const textureLoader = new THREE.TextureLoader()
 
-const matcapTextTexture = textureLoader.load('./textures/matcaps/7.png')
-
 const wrappedGiftTexture = textureLoader.load('./textures/wrapped_gift_paper.jpeg')
 wrappedGiftTexture.wrapS = THREE.RepeatWrapping
 wrappedGiftTexture.wrapT = THREE.RepeatWrapping
@@ -52,16 +50,16 @@ scene.add(pointLight)
 /**
  * Models & objects
  */
-// Mario block
 const gltfLoader = new GLTFLoader()
 
+// Christmas bell
 gltfLoader.load(
-  '/models/mario_block/scene.gltf',
+  '/models/bell/scene.gltf',
   (gltf) => {
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 200; i++) {
       const clone = gltf.scene.clone()
 
-      clone.name = 'Cube'
+      clone.name = 'bell'
 
       clone.position.x = (Math.random() - .5) * 30
       clone.position.y = (Math.random() - .5) * 30
@@ -70,7 +68,64 @@ gltfLoader.load(
       clone.rotation.x = Math.random() * Math.PI
       clone.rotation.y = Math.random() * Math.PI
 
-      const scale = Math.random() * .8
+      const scale = Math.random() * 8
+      clone.scale.set(scale, scale, scale)
+
+      clone.traverse((child) => {
+        child.castShadow = true
+      })
+
+      scene.add(clone)
+    }
+  },
+)
+
+// Christmas ball
+gltfLoader.load(
+  '/models/new-ball/new-ball.gltf',
+  (gltf) => {
+    console.log(gltf.scene.children[0].children[0])
+    for (let i = 0; i < 200; i++) {
+      const clone = gltf.scene.children[0].children[0].clone()
+
+      clone.name = 'ball'
+
+      clone.position.x = (Math.random() - .5) * 30
+      clone.position.y = (Math.random() - .5) * 30
+      clone.position.z = (Math.random() - .5) * 30
+
+      clone.rotation.x = Math.random() * Math.PI
+      clone.rotation.y = Math.random() * Math.PI
+
+      const scale = Math.random() * .3
+      clone.scale.set(scale, scale, scale)
+
+      clone.traverse((child) => {
+        child.castShadow = true
+      })
+
+      scene.add(clone)
+    }
+  },
+)
+
+// Christmas stocking
+gltfLoader.load(
+  '/models/stocking/scene.gltf',
+  (gltf) => {
+    for (let i = 0; i < 200; i++) {
+      const clone = gltf.scene.children[0].clone()
+
+      clone.name = 'stocking'
+
+      clone.position.x = (Math.random() - .5) * 30
+      clone.position.y = (Math.random() - .5) * 30
+      clone.position.z = (Math.random() - .5) * 30
+
+      clone.rotation.x = Math.random() * Math.PI
+      clone.rotation.y = Math.random() * Math.PI
+
+      const scale = Math.random() * .002
       clone.scale.set(scale, scale, scale)
 
       clone.traverse((child) => {
@@ -92,7 +147,7 @@ const wallRight = new THREE.Mesh(
     roughness: .8
   })
 )
-wallRight.position.set(8, 0, -8)
+wallRight.position.set(10, 0, -10)
 wallRight.rotation.y = Math.PI * 1.5
 wallRight.receiveShadow = true
 
@@ -105,7 +160,7 @@ const wallLeft = new THREE.Mesh(
     roughness: .8
   })
 )
-wallLeft.position.set(-8, 0, -8)
+wallLeft.position.set(-10, 0, -10)
 wallLeft.rotation.y = Math.PI * .5
 wallLeft.receiveShadow = true
 
@@ -118,7 +173,7 @@ const roof = new THREE.Mesh(
     roughness: .8
   })
 )
-roof.position.set(0, 8, -8)
+roof.position.set(0, 5, -5)
 roof.rotation.x = Math.PI * .5
 roof.receiveShadow = true
 
@@ -131,7 +186,7 @@ const floor = new THREE.Mesh(
     roughness: .8
   })
 )
-floor.position.set(0, -8, -8)
+floor.position.set(0, -5, -5)
 floor.rotation.x = Math.PI * -.5
 floor.receiveShadow = true
 
@@ -144,7 +199,7 @@ const backgroundWall = new THREE.Mesh(
     roughness: .8
   })
 )
-backgroundWall.position.set(0, 0, -5)
+backgroundWall.position.set(0, 0, -3)
 backgroundWall.receiveShadow = true
 
 scene.add(wallRight, wallLeft, roof, floor, backgroundWall)
@@ -295,8 +350,8 @@ const tick = () => {
 
   // Rotate the blocks and only the blocks
   scene.children.forEach((child) => {
-    if (child.name === 'Cube') {
-      child.rotation.y = elapsedTime * .2
+    if (child.name === 'bell' || child.name === 'ball' || child.name === 'stocking') {
+      child.rotation.y = elapsedTime * .5
     }
   })
 

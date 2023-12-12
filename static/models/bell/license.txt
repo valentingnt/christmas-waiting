@@ -1,0 +1,11 @@
+Model Information:
+* title:	Christmas Bell
+* source:	https://sketchfab.com/3d-models/christmas-bell-17ab79bef97e406598b52b31ce57f76e
+* author:	giga (https://sketchfab.com/gits3d)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Christmas Bell" (https://sketchfab.com/3d-models/christmas-bell-17ab79bef97e406598b52b31ce57f76e) by giga (https://sketchfab.com/gits3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

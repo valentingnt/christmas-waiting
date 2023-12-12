@@ -1,0 +1,287 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 667,
+      "max": [
+        1.4705229997634888,
+        0.3155827522277832,
+        5.046358108520508
+      ],
+      "min": [
+        -1.506872534751892,
+        -0.8474338054656982,
+        -2.1633810997009277
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 8004,
+      "componentType": 5126,
+      "count": 667,
+      "max": [
+        0.9920836687088013,
+        0.9999270439147949,
+        0.9923297762870789
+      ],
+      "min": [
+        -0.9920789003372192,
+        -0.9993326663970947,
+        -0.9917234778404236
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 667,
+      "max": [
+        0.997006893157959,
+        0.9903860688209534,
+        0.9991549253463745,
+        1.0
+      ],
+      "min": [
+        -0.9916813969612122,
+        -0.9932569265365601,
+        -0.9961394667625427,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 667,
+      "max": [
+        0.9994519352912903,
+        0.998882532119751
+      ],
+      "min": [
+        0.00035428348928689957,
+        0.023973464965820313
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 3408,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Duznot (https://sketchfab.com/duz_vr)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/christmas-stocking-b42b0ebf61cc436e88f8cfdebc3b463e",
+      "title": "Christmas Stocking"
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 13632,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5336,
+      "byteOffset": 13632,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 16008,
+      "byteOffset": 18968,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 10672,
+      "byteOffset": 34976,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 45648,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Stocking_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/Stocking_metallicRoughness.png"
+    },
+    {
+      "uri": "textures/Stocking_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Stocking",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cube_Stocking_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.0009498153129285092,
+        -0.0007482504066922276,
+        0.0011440147078372318,
+        0.0,
+        0.0011841322729023857,
+        -0.00024566223059088705,
+        -0.0011437998055979781,
+        0.0,
+        0.0006829926529843822,
+        0.0014664817684568732,
+        0.00039210922679459197,
+        0.0,
+        -41.008907318115234,
+        12.412881851196294,
+        -24.387668609619137,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Stocking3.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.629206793918314e-05,
+        -99.99999999999868,
+        0.0,
+        0.0,
+        99.99999999999868,
+        -1.629206793918314e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Cube"
+    },
+    {
+      "mesh": 0,
+      "name": "Cube_Stocking_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}
