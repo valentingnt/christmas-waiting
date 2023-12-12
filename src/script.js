@@ -193,12 +193,29 @@ const cursor = {
   y: 0
 }
 
+function onClick() {
+  // feature detect
+  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    DeviceOrientationEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          window.addEventListener('deviceorientation', handleMobileOrientation, true)
+        }
+      })
+      .catch(console.error);
+  } else {
+    // handle regular non iOS 13+ devices
+  }
+}
+
 window.addEventListener('mousemove', (event) => {
   cursor.x = event.clientX / sizes.width - 0.5
   cursor.y = - (event.clientY / sizes.height - 0.5)
 }, { passive: true })
 
 window.addEventListener('touchmove', (event) => {
+  onClick()
+
   cursor.x = event.touches[0].clientX / sizes.width - 0.5
   cursor.y = - (event.touches[0].clientY / sizes.height - 0.5)
 }, { passive: true })
@@ -210,14 +227,6 @@ function handleMobileOrientation(event) {
   cursor.x = x / 180
   cursor.y = y / 180
 }
-
-DeviceOrientationEvent.requestPermission().then(response => {
-  if (response === 'granted') {
-    window.addEventListener("deviceorientation", handleMobileOrientation, true)
-  } else {
-    console.log('Permission to access device orientation is denied.')
-  }
-})
 
 
 /**
