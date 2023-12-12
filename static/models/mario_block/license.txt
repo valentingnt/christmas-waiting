@@ -1,0 +1,11 @@
+Model Information:
+* title:	Mario Block
+* source:	https://sketchfab.com/3d-models/mario-block-5b05b1a00eb342e6b2f80a66dca07fae
+* author:	GabyHerofly (https://sketchfab.com/gabrielvernet26)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Mario Block" (https://sketchfab.com/3d-models/mario-block-5b05b1a00eb342e6b2f80a66dca07fae) by GabyHerofly (https://sketchfab.com/gabrielvernet26) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
