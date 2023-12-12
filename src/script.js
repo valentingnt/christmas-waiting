@@ -227,8 +227,8 @@ function handleMobileOrientation(event) {
 
   console.log(x, y)
 
-  cursor.x = x / 180
-  cursor.y = y / 180
+  cursor.x = (x / 60) * -1
+  cursor.y = y / 60
 }
 
 
