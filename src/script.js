@@ -197,16 +197,17 @@ const button = document.getElementById('btn')
 button.addEventListener('click', onClick)
 
 function onClick() {
-  console.log('click')
   if (typeof DeviceOrientationEvent.requestPermission === 'function') {
     DeviceOrientationEvent.requestPermission()
       .then(permissionState => {
         if (permissionState === 'granted') {
+          button.style.display = 'none'
           window.addEventListener('deviceorientation', handleMobileOrientation, true)
         }
       })
       .catch(console.error);
   } else {
+    button.style.display = 'none'
     window.addEventListener('deviceorientation', handleMobileOrientation, true)
   }
 }
@@ -222,12 +223,10 @@ window.addEventListener('touchmove', (event) => {
 }, { passive: true })
 
 function handleMobileOrientation(event) {
-  const x = event.gamma
+  const x = -event.gamma
   const y = event.beta
 
-  console.log(x, y)
-
-  cursor.x = (x / 60) * -1
+  cursor.x = x / 60
   cursor.y = y / 60
 }
 
