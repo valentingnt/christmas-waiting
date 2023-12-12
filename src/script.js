@@ -193,8 +193,11 @@ const cursor = {
   y: 0
 }
 
+// const button = document.getElementById('btn')
+// button.addEventListener('click', onClick)
+
 function onClick() {
-  // feature detect
+  // console.log('click')
   if (typeof DeviceOrientationEvent.requestPermission === 'function') {
     DeviceOrientationEvent.requestPermission()
       .then(permissionState => {
@@ -204,7 +207,7 @@ function onClick() {
       })
       .catch(console.error);
   } else {
-    // handle regular non iOS 13+ devices
+    window.addEventListener('deviceorientation', handleMobileOrientation, true)
   }
 }
 
@@ -214,8 +217,6 @@ window.addEventListener('mousemove', (event) => {
 }, { passive: true })
 
 window.addEventListener('touchmove', (event) => {
-  onClick()
-
   cursor.x = event.touches[0].clientX / sizes.width - 0.5
   cursor.y = - (event.touches[0].clientY / sizes.height - 0.5)
 }, { passive: true })
