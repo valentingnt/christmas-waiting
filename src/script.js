@@ -6,7 +6,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 THREE.ColorManagement.enabled = false
-const gui = new GUI()
+// const gui = new GUI()
 
 /**
  * Base
