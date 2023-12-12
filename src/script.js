@@ -222,8 +222,10 @@ window.addEventListener('touchmove', (event) => {
 }, { passive: true })
 
 function handleMobileOrientation(event) {
-  const x = event.beta
-  const y = event.gamma
+  const x = event.gamma
+  const y = event.beta
+
+  console.log(x, y)
 
   cursor.x = x / 180
   cursor.y = y / 180
