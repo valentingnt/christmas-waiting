@@ -196,8 +196,11 @@ const cursor = {
 const button = document.getElementById('btn')
 button.addEventListener('click', onClick)
 
+const IS_IOS_SAFARI = typeof DeviceOrientationEvent.requestPermission === 'function'
+button.style.display = IS_IOS_SAFARI ? 'block' : 'none'
+
 function onClick() {
-  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+  if (IS_IOS_SAFARI) {
     DeviceOrientationEvent.requestPermission()
       .then(permissionState => {
         if (permissionState === 'granted') {
@@ -207,7 +210,6 @@ function onClick() {
       })
       .catch(console.error);
   } else {
-    button.style.display = 'none'
     window.addEventListener('deviceorientation', handleMobileOrientation, true)
   }
 }
