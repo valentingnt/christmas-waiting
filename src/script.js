@@ -35,10 +35,7 @@ function openGift() {
   if (IS_IOS_SAFARI) {
     DeviceOrientationEvent.requestPermission()
       .then(permissionState => {
-        if (permissionState === 'granted') {
-          motionButton.style.display = 'none'
-          window.addEventListener('deviceorientation', handleMobileOrientation, true)
-        }
+        if (permissionState === 'granted') window.addEventListener('deviceorientation', handleMobileOrientation, true)
       })
       .catch(console.error);
   } else window.addEventListener('deviceorientation', handleMobileOrientation, true)
