@@ -9,6 +9,42 @@ THREE.ColorManagement.enabled = false
 // const gui = new GUI()
 
 /**
+ * HTML handling
+ */
+
+// Motion handling
+const IS_IOS_SAFARI = typeof DeviceOrientationEvent.requestPermission === 'function'
+
+function handleMobileOrientation(event) {
+  const x = -event.gamma
+  const y = event.beta
+
+  cursor.x = x / 60
+  cursor.y = y / 60
+}
+
+// Gift modal button
+const modalButton = document.getElementById('gift-btn')
+const modal = document.getElementById('modal')
+
+modalButton.addEventListener('click', openGift)
+
+function openGift() {
+  modal.style.display = 'none'
+
+  if (IS_IOS_SAFARI) {
+    DeviceOrientationEvent.requestPermission()
+      .then(permissionState => {
+        if (permissionState === 'granted') {
+          motionButton.style.display = 'none'
+          window.addEventListener('deviceorientation', handleMobileOrientation, true)
+        }
+      })
+      .catch(console.error);
+  } else window.addEventListener('deviceorientation', handleMobileOrientation, true)
+}
+
+/**
  * Base
  */
 
@@ -278,28 +314,6 @@ const cursor = {
   y: 0
 }
 
-const button = document.getElementById('btn')
-button.addEventListener('click', onClick)
-
-const IS_IOS_SAFARI = typeof DeviceOrientationEvent.requestPermission === 'function'
-
-window.requestAnimationFrame(() => button.style.display = IS_IOS_SAFARI ? 'block' : 'none')
-
-function onClick() {
-  if (IS_IOS_SAFARI) {
-    DeviceOrientationEvent.requestPermission()
-      .then(permissionState => {
-        if (permissionState === 'granted') {
-          button.style.display = 'none'
-          window.addEventListener('deviceorientation', handleMobileOrientation, true)
-        }
-      })
-      .catch(console.error);
-  } else {
-    window.addEventListener('deviceorientation', handleMobileOrientation, true)
-  }
-}
-
 window.addEventListener('mousemove', (event) => {
   cursor.x = event.clientX / sizes.width - 0.5
   cursor.y = - (event.clientY / sizes.height - 0.5)
@@ -309,15 +323,6 @@ window.addEventListener('touchmove', (event) => {
   cursor.x = event.touches[0].clientX / sizes.width - 0.5
   cursor.y = - (event.touches[0].clientY / sizes.height - 0.5)
 }, { passive: true })
-
-function handleMobileOrientation(event) {
-  const x = -event.gamma
-  const y = event.beta
-
-  cursor.x = x / 60
-  cursor.y = y / 60
-}
-
 
 /**
  * Renderer
