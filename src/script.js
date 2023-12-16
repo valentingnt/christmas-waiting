@@ -11,6 +11,11 @@ THREE.ColorManagement.enabled = false
 /**
  * HTML handling
  */
+function hideLoadingModal() {
+  const loadingModal = document.getElementById('loading-modal')
+
+  loadingModal.style.display = 'none'
+}
 
 // Motion handling
 const IS_IOS_SAFARI = typeof DeviceOrientationEvent.requestPermission === 'function'
@@ -27,9 +32,9 @@ function handleMobileOrientation(event) {
 const modalButton = document.getElementById('gift-btn')
 const modal = document.getElementById('modal')
 
-modalButton.addEventListener('click', openGift)
+modalButton.addEventListener('click', dismissModal)
 
-function openGift() {
+function dismissModal() {
   modal.style.display = 'none'
 
   if (IS_IOS_SAFARI) {
@@ -117,7 +122,6 @@ gltfLoader.load(
 gltfLoader.load(
   '/models/new-ball/new-ball.gltf',
   (gltf) => {
-    console.log(gltf.scene.children[0].children[0])
     for (let i = 0; i < 200; i++) {
       const clone = gltf.scene.children[0].children[0].clone()
 
@@ -138,6 +142,8 @@ gltfLoader.load(
       })
 
       scene.add(clone)
+
+      if (i === 199) hideLoadingModal()
     }
   },
 )
@@ -253,10 +259,7 @@ let fontObject = null
 
 function loadFont(size) {
   fontLoader.loadAsync(
-    '/fonts/christmas.json',
-    (xhr) => {
-      console.log(`${(xhr.loaded / xhr.total * 100)}% loaded`)
-    }
+    '/fonts/christmas.json'
   ).then((font) => {
     const textGeometry = new TextGeometry(
       `Ho Ho Ho !\nSois patient...`,

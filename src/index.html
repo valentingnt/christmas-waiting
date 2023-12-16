@@ -10,16 +10,30 @@
 
 <body>
   <canvas class="webgl"></canvas>
-  <button id="motion-btn">Enable motion</button>
   <script type="module" src="./script.js"></script>
 
   <div id="modal">
     <div class="modal-content">
-      <h2>Open Your Gift!</h2>
-      <p>Click the button below to open your gift.</p>
-      <button id="gift-btn">Open Gift</button>
+      <h2 class="title">
+        Ouvre ton cadeau! 🎁
+      </h2>
+      <p class="description bottom-padding">
+        Appuie sur le bouton pour ouvrir ton cadeau!
+      </p>
+      <button id="gift-btn">Ouvrir</button>
     </div>
   </div>
+
+  <!-- Loading modal -->
+  <div id="loading-modal">
+    <div class="modal-content">
+      <h2 class="title">
+        Chargement...
+      </h2>
+      <p class="description">
+        Le cadeau est en train de charger... 🎅
+      </p>
+    </div>
 </body>
 
 </html>
