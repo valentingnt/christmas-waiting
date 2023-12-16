@@ -24,8 +24,8 @@ function handleMobileOrientation(event) {
   const x = -event.gamma
   const y = event.beta
 
-  cursor.x = x / 60
-  cursor.y = y / 60
+  cursor.x = (x / 60) * 2
+  cursor.y = (y / 60) * 2
 }
 
 // Gift modal button
@@ -315,13 +315,8 @@ const cursor = {
 }
 
 window.addEventListener('mousemove', (event) => {
-  cursor.x = event.clientX / sizes.width - 0.5
-  cursor.y = - (event.clientY / sizes.height - 0.5)
-}, { passive: true })
-
-window.addEventListener('touchmove', (event) => {
-  cursor.x = event.touches[0].clientX / sizes.width - 0.5
-  cursor.y = - (event.touches[0].clientY / sizes.height - 0.5)
+  cursor.x = (event.clientX / sizes.width - 0.5) * 2
+  cursor.y = (- (event.clientY / sizes.height - 0.5)) * 2
 }, { passive: true })
 
 /**
