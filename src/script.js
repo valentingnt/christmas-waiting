@@ -1,26 +1,17 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import GUI from 'lil-gui'
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
 THREE.ColorManagement.enabled = false
-// const gui = new GUI()
 
-/**
- * HTML handling
- */
-function hideLoadingModal() {
-  const loadingModal = document.getElementById('loading-modal')
-
-  loadingModal.style.display = 'none'
-}
+// HTML handling
+const loadingModal = document.getElementById('loading-modal')
+const hideLoadingModal = () => loadingModal.style.display = 'none'
 
 // Motion handling
 const IS_IOS_SAFARI = typeof DeviceOrientationEvent.requestPermission === 'function'
-
-function handleMobileOrientation(event) {
+const handleMobileOrientation = (event) => {
   const x = -event.gamma
   const y = event.beta
 
@@ -32,9 +23,7 @@ function handleMobileOrientation(event) {
 const modalButton = document.getElementById('gift-btn')
 const modal = document.getElementById('modal')
 
-modalButton.addEventListener('click', dismissModal)
-
-function dismissModal() {
+const dismissModal = () => {
   modal.style.display = 'none'
 
   if (IS_IOS_SAFARI) {
@@ -46,32 +35,22 @@ function dismissModal() {
   } else window.addEventListener('deviceorientation', handleMobileOrientation, true)
 }
 
-/**
- * Base
- */
+modalButton.addEventListener('click', dismissModal)
 
-// Canvas
+// Base
 const canvas = document.querySelector('canvas.webgl')
-
-// Scene
 const scene = new THREE.Scene()
 
-/**
- * Textures
- */
+// Textures
 const textureLoader = new THREE.TextureLoader()
-
 const wrappedGiftTexture = textureLoader.load('./textures/wrapped_gift_paper.jpeg')
 wrappedGiftTexture.wrapS = THREE.RepeatWrapping
 wrappedGiftTexture.wrapT = THREE.RepeatWrapping
 wrappedGiftTexture.repeat.x = 5
 wrappedGiftTexture.repeat.y = 5
 
-/**
- * Lights
- */
+// Lights
 const ambientLight = new THREE.AmbientLight(0xffffff, .2)
-
 scene.add(ambientLight)
 
 const pointLight = new THREE.PointLight(0xffffff, .8)
@@ -82,50 +61,17 @@ pointLight.shadow.camera.far = 25
 pointLight.shadow.camera.fov = 50
 pointLight.shadow.bias = 0.001
 pointLight.shadow.mapSize.set(2048, 2048)
-
 scene.add(pointLight)
 
-/**
- * Models & objects
- */
+// Models & objects
 const gltfLoader = new GLTFLoader()
 
-// Christmas bell
-gltfLoader.load(
-  '/models/bell/scene.gltf',
-  (gltf) => {
+// Function to load and manipulate models
+function loadAndManipulateModel(path, name, scaleModifier, hideModal = false) {
+  gltfLoader.load(path, (gltf) => {
     for (let i = 0; i < 200; i++) {
       const clone = gltf.scene.clone()
-
-      clone.name = 'bell'
-
-      clone.position.x = (Math.random() - .5) * 30
-      clone.position.y = (Math.random() - .5) * 30
-      clone.position.z = (Math.random() - .5) * 30
-
-      clone.rotation.x = Math.random() * Math.PI
-      clone.rotation.y = Math.random() * Math.PI
-
-      const scale = Math.random() * 8
-      clone.scale.set(scale, scale, scale)
-
-      clone.traverse((child) => {
-        child.castShadow = true
-      })
-
-      scene.add(clone)
-    }
-  },
-)
-
-// Christmas ball
-gltfLoader.load(
-  '/models/new-ball/new-ball.gltf',
-  (gltf) => {
-    for (let i = 0; i < 200; i++) {
-      const clone = gltf.scene.children[0].children[0].clone()
-
-      clone.name = 'ball'
+      clone.name = name
 
       clone.position.x = (Math.random() - .5) * 30
       clone.position.y = (Math.random() - .5) * 30
@@ -134,37 +80,7 @@ gltfLoader.load(
       clone.rotation.x = Math.random() * Math.PI
       clone.rotation.y = Math.random() * Math.PI
 
-      const scale = Math.random() * .3
-      clone.scale.set(scale, scale, scale)
-
-      clone.traverse((child) => {
-        child.castShadow = true
-      })
-
-      scene.add(clone)
-
-      if (i === 199) hideLoadingModal()
-    }
-  },
-)
-
-// Christmas stocking
-gltfLoader.load(
-  '/models/stocking/scene.gltf',
-  (gltf) => {
-    for (let i = 0; i < 200; i++) {
-      const clone = gltf.scene.children[0].clone()
-
-      clone.name = 'stocking'
-
-      clone.position.x = (Math.random() - .5) * 30
-      clone.position.y = (Math.random() - .5) * 30
-      clone.position.z = (Math.random() - .5) * 30
-
-      clone.rotation.x = Math.random() * Math.PI
-      clone.rotation.y = Math.random() * Math.PI
-
-      const scale = Math.random() * .002
+      const scale = Math.random() * scaleModifier
       clone.scale.set(scale, scale, scale)
 
       clone.traverse((child) => {
@@ -173,87 +89,47 @@ gltfLoader.load(
 
       scene.add(clone)
     }
-  },
-)
 
-// Walls
-const wallRight = new THREE.Mesh(
-  new THREE.PlaneGeometry(50, 50),
-  new THREE.MeshStandardMaterial({
-    color: '#c8c6bf',
-    map: wrappedGiftTexture,
-    metalness: 0,
-    roughness: .8
+    if (hideModal) hideLoadingModal()
   })
+}
+
+loadAndManipulateModel('/models/bell/scene.gltf', 'bell', 8)
+loadAndManipulateModel('/models/new-ball/new-ball.gltf', 'ball', .3)
+loadAndManipulateModel('/models/stocking/scene.gltf', 'stocking', .002, true)
+
+// Function to create walls
+function createWall(position, rotation, receiveShadow = true) {
+  const wall = new THREE.Mesh(
+    new THREE.PlaneGeometry(30, 30),
+    new THREE.MeshStandardMaterial({
+      color: '#c8c6bf',
+      map: wrappedGiftTexture,
+      metalness: 0,
+      roughness: .8
+    })
+  )
+  wall.position.set(...position)
+  wall.rotation.set(...rotation)
+  wall.receiveShadow = receiveShadow
+  return wall
+}
+
+scene.add(
+  createWall([10, 0, -10], [0, Math.PI * 1.5, 0]),
+  createWall([-10, 0, -10], [0, Math.PI * .5, 0]),
+  createWall([0, 5, -5], [Math.PI * .5, 0, 0]),
+  createWall([0, -5, -5], [Math.PI * -.5, 0, 0]),
+  createWall([0, 0, -3], [0, 0, 0])
 )
-wallRight.position.set(10, 0, -10)
-wallRight.rotation.y = Math.PI * 1.5
-wallRight.receiveShadow = true
 
-const wallLeft = new THREE.Mesh(
-  new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({
-    color: '#c8c6bf',
-    map: wrappedGiftTexture,
-    metalness: 0,
-    roughness: .8
-  })
-)
-wallLeft.position.set(-10, 0, -10)
-wallLeft.rotation.y = Math.PI * .5
-wallLeft.receiveShadow = true
-
-const roof = new THREE.Mesh(
-  new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({
-    color: '#c8c6bf',
-    map: wrappedGiftTexture,
-    metalness: 0,
-    roughness: .8
-  })
-)
-roof.position.set(0, 5, -5)
-roof.rotation.x = Math.PI * .5
-roof.receiveShadow = true
-
-const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({
-    color: '#c8c6bf',
-    map: wrappedGiftTexture,
-    metalness: 0,
-    roughness: .8
-  })
-)
-floor.position.set(0, -5, -5)
-floor.rotation.x = Math.PI * -.5
-floor.receiveShadow = true
-
-const backgroundWall = new THREE.Mesh(
-  new THREE.PlaneGeometry(30, 30),
-  new THREE.MeshStandardMaterial({
-    color: '#c8c6bf',
-    map: wrappedGiftTexture,
-    metalness: 0,
-    roughness: .8
-  })
-)
-backgroundWall.position.set(0, 0, -3)
-backgroundWall.receiveShadow = true
-
-scene.add(wallRight, wallLeft, roof, floor, backgroundWall)
-
-/**
- * Sizes
- */
+// Sizes
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
 }
 
-/**
- * Fonts
- */
+// Fonts
 const fontLoader = new FontLoader()
 let fontObject = null
 
@@ -287,7 +163,7 @@ function loadFont(size) {
 
 loadFont((sizes.width / sizes.height) * 1.4)
 
-window.addEventListener('resize', () => {
+function handleResize() {
   // Update sizes
   sizes.width = window.innerWidth
   sizes.height = window.innerHeight
@@ -299,13 +175,11 @@ window.addEventListener('resize', () => {
   // Update renderer
   renderer.setSize(sizes.width, sizes.height)
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+}
 
-/**
- * Camera
- */
-// Base camera
+window.addEventListener('resize', handleResize)
 
+// Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.set(1, 0, 10)
 
@@ -314,10 +188,12 @@ const cursor = {
   y: 0
 }
 
-window.addEventListener('mousemove', (event) => {
+function handleMouseMove(event) {
   cursor.x = (event.clientX / sizes.width - 0.5) * 2
   cursor.y = (- (event.clientY / sizes.height - 0.5)) * 2
-}, { passive: true })
+}
+
+window.addEventListener('mousemove', handleMouseMove, { passive: true })
 
 /**
  * Renderer
@@ -334,13 +210,20 @@ renderer.outputColorSpace = THREE.LinearSRGBColorSpace
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-
 /**
  * Animate
  */
 const clock = new THREE.Clock()
 
-const tick = () => {
+function rotateBlocks(elapsedTime) {
+  scene.children.forEach((child) => {
+    if (child.name === 'bell' || child.name === 'ball' || child.name === 'stocking') {
+      child.rotation.y = elapsedTime * .5
+    }
+  })
+}
+
+function tick() {
   const elapsedTime = clock.getElapsedTime()
 
   // Update camera
@@ -348,12 +231,7 @@ const tick = () => {
   camera.position.y = (cursor.y * .8) + 1
   camera.lookAt(0, 0, 0)
 
-  // Rotate the blocks and only the blocks
-  scene.children.forEach((child) => {
-    if (child.name === 'bell' || child.name === 'ball' || child.name === 'stocking') {
-      child.rotation.y = elapsedTime * .5
-    }
-  })
+  rotateBlocks(elapsedTime)
 
   // Move the camera z position
   camera.position.z = (Math.sin(elapsedTime * .1)) + 6
