@@ -188,13 +188,6 @@ const cursor = {
   y: 0
 }
 
-function handleMouseMove(event) {
-  cursor.x = (event.clientX / sizes.width - 0.5) * 2
-  cursor.y = (- (event.clientY / sizes.height - 0.5)) * 2
-}
-
-window.addEventListener('mousemove', handleMouseMove, { passive: true })
-
 /**
  * Renderer
  */
